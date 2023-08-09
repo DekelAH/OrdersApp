@@ -13,18 +13,18 @@ namespace OrdersApp.Core.Domain.RepositoryContracts
         Task<List<OrderItem>> GetAllOrderItems();
 
         /// <summary>
-        /// Get specific OrderItem object by orderItemID
+        /// Get specific OrderItem object by orderID
         /// </summary>
-        /// <param name="orderItemID">orderItemID to search</param>
+        /// <param name="orderID">orderID to search</param>
         /// <returns>Matching OrderItem object</returns>
-        Task<OrderItem?> GetOrderItemById(Guid orderItemID);
+        Task<OrderItem?> GetOrderItemById(Guid orderID);
 
         /// <summary>
-        /// Get all the matching OrderItems by orderItemID
+        /// Get all the matching OrderItems by orderID
         /// </summary>
-        /// <param name="orderItemID">orderItemID to search</param>
+        /// <param name="orderID">orderID to search</param>
         /// <returns>List of all matching OrderItem objects</returns>
-        Task<List<OrderItem>> GetMatchingOrderItemsByOrderID(Guid orderItemID);
+        Task<List<OrderItem>> GetMatchingOrderItemsByOrderID(Guid orderID);
 
         /// <summary>
         /// Adding new OrderItem object to the database
@@ -36,7 +36,7 @@ namespace OrdersApp.Core.Domain.RepositoryContracts
         /// <summary>
         /// Updating existing OrderItem object
         /// </summary>
-        /// <param name="orderItemToUpdate">new OrderItem object to add</param>
+        /// <param name="orderItemToUpdate">new OrderItem object to update</param>
         /// <returns>Updated OrderItem object</returns>
         Task<OrderItem> UpdateOrderItem(OrderItem orderItemToUpdate);
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrdersApp.Core.Services;
+using OrdersApp.Core.Services.OrderItems;
+using OrdersApp.Core.Services.Orders;
+using OrdersApp.Core.ServicesContracts.OrderItems;
 using OrdersApp.Core.ServicesContracts.Orders;
 using OrdersApp.Infrastructure.DataBaseContext;
 
@@ -16,6 +18,11 @@ namespace OrdersApp.WebApi.StartupExtensions
             services.AddScoped<IOrdersGetterService, OrdersGetterService>();
             services.AddScoped<IOrdersUpdaterService, OrdersUpdaterService>();
             services.AddScoped<IOrdersDeleterService, OrdersDeleterService>();
+            services.AddScoped<IOrdersAdderService, OrdersAdderService>();
+
+            services.AddScoped<IOrderItemsGetterService, OrderItemsGetterService>();
+            services.AddScoped<IOrderItemsDeleterService, OrderItemsDeleterService>();
+            services.AddScoped<IOrderItemsUpdaterService, OrderItemsUpdaterService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {

@@ -1,4 +1,4 @@
-﻿using OrdersApp.Core.Domain.Entities;
+﻿using OrdersApp.Core.DTO;
 
 namespace OrdersApp.Core.ServicesContracts.Orders
 {
@@ -11,7 +11,7 @@ namespace OrdersApp.Core.ServicesContracts.Orders
         /// </summary>
         /// <param name="newOrder">new Order object to add</param>
         /// <returns>New added Order object</returns>
-        Task<Order> AddNewOrder(Order newOrder);
+        Task<OrderResponse> AddNewOrder(OrderAddRequest newOrder);
 
         #endregion
     }

@@ -2,7 +2,7 @@
 using OrdersApp.Core.Domain.RepositoryContracts;
 using OrdersApp.Core.ServicesContracts.Orders;
 
-namespace OrdersApp.Core.Services
+namespace OrdersApp.Core.Services.Orders
 {
     public class OrdersDeleterService : IOrdersDeleterService
     {

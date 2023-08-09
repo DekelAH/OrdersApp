@@ -1,4 +1,4 @@
-﻿using OrdersApp.Core.Domain.Entities;
+﻿using OrdersApp.Core.DTO;
 
 namespace OrdersApp.Core.ServicesContracts.Orders
 {
@@ -10,14 +10,14 @@ namespace OrdersApp.Core.ServicesContracts.Orders
         /// Get all the orders from Orders repository
         /// </summary>
         /// <returns>List of all the orders</returns>
-        Task<List<Order>> GetAllOrders();
+        Task<List<OrderResponse>> GetAllOrders();
 
         /// <summary>
         /// Get specific Order object by OrderID
         /// </summary>
         /// <param name="orderID">OrderID to search</param>
         /// <returns>Matching Order object</returns>
-        Task<Order?> GetOrderById(Guid orderID);
+        Task<OrderResponse?> GetOrderById(Guid orderID);
 
         #endregion
     }

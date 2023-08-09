@@ -1,4 +1,4 @@
-﻿using OrdersApp.Core.Domain.Entities;
+﻿using OrdersApp.Core.DTO;
 
 namespace OrdersApp.Core.ServicesContracts.Orders
 {
@@ -11,7 +11,7 @@ namespace OrdersApp.Core.ServicesContracts.Orders
         /// </summary>
         /// <param name="orderToUpdate">new Order object to add</param>
         /// <returns>Updated Order object</returns>
-        Task<Order> UpdateOrder(Order orderToUpdate);
+        Task<OrderResponse> UpdateOrder(OrderUpdateRequest orderToUpdate);
 
         #endregion
     }
