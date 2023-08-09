@@ -1,0 +1,12 @@
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\bin\Debug\net7.0\OrdersApp.Core.deps.json
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\bin\Debug\net7.0\OrdersApp.Core.dll
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\bin\Debug\net7.0\OrdersApp.Core.pdb
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\OrdersApp.Core.csproj.AssemblyReference.cache
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\OrdersApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\OrdersApp.Core.AssemblyInfoInputs.cache
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\OrdersApp.Core.AssemblyInfo.cs
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\OrdersApp.Core.csproj.CoreCompileInputs.cache
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\OrdersApp.Core.dll
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\refint\OrdersApp.Core.dll
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\OrdersApp.Core.pdb
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Core\obj\Debug\net7.0\ref\OrdersApp.Core.dll

@@ -1,0 +1,17 @@
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.csproj.AssemblyReference.cache
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.AssemblyInfoInputs.cache
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.AssemblyInfo.cs
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\bin\Debug\net7.0\OrdersApp.Infrastructure.deps.json
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\bin\Debug\net7.0\OrdersApp.Infrastructure.runtimeconfig.json
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\bin\Debug\net7.0\OrdersApp.Infrastructure.dll
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\bin\Debug\net7.0\OrdersApp.Infrastructure.pdb
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\bin\Debug\net7.0\OrdersApp.Core.dll
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\bin\Debug\net7.0\OrdersApp.Core.pdb
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.csproj.CopyComplete
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.dll
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\refint\OrdersApp.Infrastructure.dll
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.pdb
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\OrdersApp.Infrastructure.genruntimeconfig.cache
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.Infrastructure\obj\Debug\net7.0\ref\OrdersApp.Infrastructure.dll

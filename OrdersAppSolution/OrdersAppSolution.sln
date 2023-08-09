@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersApp.WebApi", "OrdersApp.WebApi\OrdersApp.WebApi.csproj", "{276B95D4-3D3D-40DC-9111-BA82F5AA3CB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersApp.WebApi", "OrdersApp.WebApi\OrdersApp.WebApi.csproj", "{276B95D4-3D3D-40DC-9111-BA82F5AA3CB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{792D744A-DED4-4631-AA36-2C4C8832CF85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersApp.Core", "OrdersApp.Core\OrdersApp.Core.csproj", "{C58DAC02-1E1A-4B97-9D35-CC4004F32A11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersApp.Core", "OrdersApp.Core\OrdersApp.Core.csproj", "{C58DAC02-1E1A-4B97-9D35-CC4004F32A11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersApp.Infrastructure", "OrdersApp.Infrastructure\OrdersApp.Infrastructure.csproj", "{60DAE30B-04AE-4374-842F-74E7507564A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{C58DAC02-1E1A-4B97-9D35-CC4004F32A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C58DAC02-1E1A-4B97-9D35-CC4004F32A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C58DAC02-1E1A-4B97-9D35-CC4004F32A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60DAE30B-04AE-4374-842F-74E7507564A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60DAE30B-04AE-4374-842F-74E7507564A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60DAE30B-04AE-4374-842F-74E7507564A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60DAE30B-04AE-4374-842F-74E7507564A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{276B95D4-3D3D-40DC-9111-BA82F5AA3CB4} = {792D744A-DED4-4631-AA36-2C4C8832CF85}
 		{C58DAC02-1E1A-4B97-9D35-CC4004F32A11} = {792D744A-DED4-4631-AA36-2C4C8832CF85}
+		{60DAE30B-04AE-4374-842F-74E7507564A3} = {792D744A-DED4-4631-AA36-2C4C8832CF85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A61B803C-4F82-42D2-A264-AB34F49F5B47}
