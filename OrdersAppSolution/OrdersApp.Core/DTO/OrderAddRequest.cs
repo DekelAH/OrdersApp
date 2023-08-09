@@ -21,6 +21,8 @@ namespace OrdersApp.Core.DTO
         [Range(0, double.MaxValue, ErrorMessage = "The Total Amount field must be a positive number")]
         public double TotalAmount { get; set; }
 
+        public List<OrderItemAddRequest> OrderItems { get; set; } = new List<OrderItemAddRequest>();
+
         #endregion
 
         #region Methods

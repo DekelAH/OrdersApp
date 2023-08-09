@@ -16,6 +16,8 @@ namespace OrdersApp.Core.DTO
 
         public double TotalAmount { get; set; }
 
+        public List<OrderItemAddRequest> OrderItems { get; set; } = new List<OrderItemAddRequest>();
+
         #endregion
 
         #region Methods

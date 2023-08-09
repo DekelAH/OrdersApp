@@ -1,5 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using OrdersApp.Infrastructure.DataBaseContext;
+using OrdersApp.WebApi.StartupExtensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,17 +8,14 @@ builder.Host.UseSerilog((HostBuilderContext context, IServiceProvider service, L
 });
 
 // Add services to the container.
+builder.Services.ConfigureServices(builder.Configuration);
 
-builder.Services.AddControllers();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
-});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
+app.UseHsts();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

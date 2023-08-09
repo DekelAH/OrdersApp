@@ -10,14 +10,14 @@ namespace OrdersApp.Core.Domain.RepositoryContracts
         /// Get all the orders from database
         /// </summary>
         /// <returns>List of all the orders</returns>
-        Task<List<Order>> GetOrders();
+        Task<List<Order>> GetAllOrders();
 
         /// <summary>
         /// Get specific Order object by OrderID
         /// </summary>
         /// <param name="orderID">OrderID to search</param>
         /// <returns>Matching Order object</returns>
-        Task<Order> GetOrderById(Guid orderID);
+        Task<Order?> GetOrderById(Guid orderID);
 
         /// <summary>
         /// Adding new Order object to the database
