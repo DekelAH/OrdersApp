@@ -23,6 +23,7 @@ namespace OrdersApp.WebApi.StartupExtensions
             services.AddScoped<IOrderItemsGetterService, OrderItemsGetterService>();
             services.AddScoped<IOrderItemsDeleterService, OrderItemsDeleterService>();
             services.AddScoped<IOrderItemsUpdaterService, OrderItemsUpdaterService>();
+            services.AddScoped<IOrderItemsAdderService, OrderItemsAdderService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {

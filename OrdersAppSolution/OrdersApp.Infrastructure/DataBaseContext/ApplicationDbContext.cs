@@ -14,7 +14,7 @@ namespace OrdersApp.Infrastructure.DataBaseContext
 
         #region Ctors
 
-        public ApplicationDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions) : base(dbContextOptions)
         {
 
         }
