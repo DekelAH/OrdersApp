@@ -1,25 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using OrdersApp.Core.Domain.Entities;
-using OrdersApp.Infrastructure.DataBaseContext;
+using OrdersApp.Core.DTO;
+using OrdersApp.Core.ServicesContracts.Orders;
 
 namespace OrdersApp.WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrdersController : ControllerBase
+    public class OrdersController : CustomControllerBase
     {
         #region Fields
 
-        private readonly ApplicationDbContext _context;
+        private readonly IOrdersGetterService _ordersGetterService;
+        private readonly IOrdersUpdaterService _ordersUpdaterService;
+        private readonly IOrdersAdderService _ordersAdderService;
+        private readonly IOrdersDeleterService _ordersDeleterService;
+
+        private readonly ILogger<OrdersController> _logger;
 
         #endregion
 
         #region Ctors
 
-        public OrdersController(ApplicationDbContext context)
+        public OrdersController
+            (
+            IOrdersGetterService ordersGetterService,
+            IOrdersUpdaterService ordersUpdaterService,
+            IOrdersAdderService ordersAdderService,
+            IOrdersDeleterService ordersDeleterService,
+            ILogger<OrdersController> logger
+            )
         {
-            _context = context;
+            _ordersGetterService = ordersGetterService;
+            _ordersUpdaterService = ordersUpdaterService;
+            _ordersAdderService = ordersAdderService;
+            _ordersDeleterService = ordersDeleterService;
+            _logger = logger;
         }
 
         #endregion
@@ -30,100 +44,90 @@ namespace OrdersApp.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-          if (_context.Orders == null)
-          {
-              return NotFound();
-          }
-            return await _context.Orders.ToListAsync();
-        }
+            _logger.LogInformation("Getting all orders...");
 
-        // GET: api/Orders/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(Guid id)
-        {
-          if (_context.Orders == null)
-          {
-              return NotFound();
-          }
-            var order = await _context.Orders.FindAsync(id);
-
-            if (order == null)
+            var allOrders = await _ordersGetterService.GetAllOrders();
+            if (allOrders == null || allOrders.Count == 0)
             {
                 return NotFound();
             }
 
-            return order;
+            _logger.LogInformation($"Retrieved {allOrders.Count} orders successfuly.");
+            return Ok(allOrders);
+        }
+
+        // GET: api/Orders/5
+        [HttpGet("{orderID}")]
+        public async Task<ActionResult<OrderResponse>> GetOrder(Guid orderID)
+        {
+            _logger.LogInformation($"Searching Order: {orderID}...");
+
+            OrderResponse? orderResponse = await _ordersGetterService.GetOrderById(orderID);
+            if (orderResponse == null)
+            {
+                return Problem(detail: "Invalid orderID", statusCode: 404, title: "Order search");
+            }
+
+            _logger.LogInformation($"Order: {orderResponse.OrderID} retrieved successfuly.");
+            return Ok(orderResponse);
         }
 
         // PUT: api/Orders/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(Guid id, Order order)
+        [HttpPut("{orderID}")]
+        public async Task<IActionResult> PutOrder(Guid orderID, OrderUpdateRequest orderUpdateRequest)
         {
-            if (id != order.OrderID)
+            _logger.LogInformation($"Searching for matching Order to update ...");
+
+            if (orderID != orderUpdateRequest.OrderID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(order).State = EntityState.Modified;
-
-            try
+            var matchingOrder = await _ordersGetterService.GetOrderById(orderID);
+            if (matchingOrder == null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return Problem(detail: "Invalid orderID", statusCode: 404, title: "Order search");
             }
 
-            return NoContent();
+            _logger.LogInformation($"Matching order found, updating Order: {matchingOrder.OrderID}...");
+
+            var updatedOrderResponse = await _ordersUpdaterService.UpdateOrder(orderUpdateRequest);
+
+            _logger.LogInformation($"Order: {updatedOrderResponse.OrderID} updated successfuly.");
+            return Ok(updatedOrderResponse);
         }
 
         // POST: api/Orders
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder(OrderAddRequest orderAddRequest)
         {
-          if (_context.Orders == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
-          }
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+            _logger.LogInformation($"Adding new Order...");
 
-            return CreatedAtAction("GetOrder", new { id = order.OrderID }, order);
+            if (orderAddRequest == null)
+            {
+                return Problem(detail: "Invalid Order details.", statusCode: 400, title: "Add Order");
+            }
+            var addedOrderResponse = await _ordersAdderService.AddNewOrder(orderAddRequest);
+
+            _logger.LogInformation($"Order: {addedOrderResponse.OrderID} added successfuly.");
+            return CreatedAtAction("GetOrder", new { id = addedOrderResponse.OrderID }, addedOrderResponse);
         }
 
         // DELETE: api/Orders/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrder(Guid id)
+        [HttpDelete("{orderID}")]
+        public async Task<IActionResult> DeleteOrder(Guid orderID)
         {
-            if (_context.Orders == null)
+            _logger.LogInformation($"Searching matching Order to delete...");
+
+            var matchingOrder = await _ordersGetterService.GetOrderById(orderID);
+            if (matchingOrder == null)
             {
-                return NotFound();
+                return Problem(detail: "Invalid Order ID.", statusCode: 404, title: "Delete Order");
             }
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+            var isDeleted = await _ordersDeleterService.DeleteOrder(matchingOrder.OrderID);
 
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool OrderExists(Guid id)
-        {
-            return (_context.Orders?.Any(e => e.OrderID == id)).GetValueOrDefault();
+            _logger.LogInformation($"Order: {matchingOrder.OrderID} deleted successfuly.");
+            return Ok(isDeleted);
         }
 
         #endregion

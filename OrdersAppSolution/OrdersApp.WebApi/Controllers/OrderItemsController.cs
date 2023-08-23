@@ -5,9 +5,7 @@ using OrdersApp.Infrastructure.DataBaseContext;
 
 namespace OrdersApp.WebApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrderItemsController : ControllerBase
+    public class OrderItemsController : CustomControllerBase
     {
         #region Fields
 

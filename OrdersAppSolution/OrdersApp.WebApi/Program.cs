@@ -2,14 +2,13 @@ using OrdersApp.WebApi.StartupExtensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureServices(builder.Configuration);
+
 builder.Host.UseSerilog((HostBuilderContext context, IServiceProvider service, LoggerConfiguration loggerConfiguration) =>
 {
     loggerConfiguration.ReadFrom.Configuration(context.Configuration).ReadFrom.Services(service);
 });
-
-// Add services to the container.
-builder.Services.ConfigureServices(builder.Configuration);
-
 
 var app = builder.Build();
 
@@ -17,7 +16,9 @@ var app = builder.Build();
 
 app.UseHsts();
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

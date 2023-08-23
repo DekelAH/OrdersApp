@@ -52,16 +52,15 @@ namespace OrdersApp.Core.Services.Orders
         {
             _logger.LogInformation($"Getting Order by orderID: {orderID}...");
             var matchingOrder = await _ordersRepository.GetOrderById(orderID);
-            var matchingOrderResponse = matchingOrder.ToOrderResponse();
-            matchingOrderResponse.OrderItems = await _orderItemGetterService.GetMatchingOrderItemsByOrderID(orderID);
             if (matchingOrder == null)
             {
                 _logger.LogInformation($"Order with orderID: {orderID} not found.");
+                return null;
             }
-            else
-            {
-                _logger.LogInformation($"Order with orderID: {orderID} found successfuly.");
-            }
+            OrderResponse matchingOrderResponse = matchingOrder.ToOrderResponse();
+            _logger.LogInformation($"Order with orderID: {orderID} found successfuly.");
+
+            matchingOrderResponse.OrderItems = await _orderItemGetterService.GetMatchingOrderItemsByOrderID(orderID);
 
             return matchingOrderResponse;
         }
