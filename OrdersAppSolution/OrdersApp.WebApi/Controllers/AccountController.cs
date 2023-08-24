@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OrdersApp.Core.DTO;
 using OrdersApp.Core.Identity;
+using OrdersApp.Core.ServicesContracts;
 
 namespace OrdersApp.WebApi.Controllers
 {
@@ -15,6 +16,8 @@ namespace OrdersApp.WebApi.Controllers
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
+        private readonly IJwtService _jwtService;
+
         #endregion
 
         #region Ctors
@@ -22,12 +25,14 @@ namespace OrdersApp.WebApi.Controllers
         public AccountController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
-            SignInManager<ApplicationUser> signInManager
+            SignInManager<ApplicationUser> signInManager,
+            IJwtService jwtService
             )
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _jwtService = jwtService;
         }
 
         #endregion
@@ -59,7 +64,8 @@ namespace OrdersApp.WebApi.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(applicationUser, isPersistent: false);
-                return Ok(applicationUser);
+                var authenticationResponse = _jwtService.CreateJwtToken(applicationUser);
+                return Ok(authenticationResponse);
             }
             else
             {
@@ -86,13 +92,15 @@ namespace OrdersApp.WebApi.Controllers
             // Check User
             if (result.Succeeded)
             {
-                ApplicationUser? user = await _userManager.FindByEmailAsync(loginDTO.Email);
-                if (user == null)
+                ApplicationUser? applicationUser = await _userManager.FindByEmailAsync(loginDTO.Email);
+                if (applicationUser == null)
                 {
                     return NoContent();
                 }
 
-                return Ok(new { personName = user.UserName, email = user.Email });
+                await _signInManager.SignInAsync(applicationUser, isPersistent: false);
+                var authenticationResponse = _jwtService.CreateJwtToken(applicationUser);
+                return Ok(authenticationResponse);
             }
             else
             {

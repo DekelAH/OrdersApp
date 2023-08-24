@@ -271,3 +271,4 @@ D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.WebApi\bin\
 D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.WebApi\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
 D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.WebApi\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
 D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.WebApi\obj\Debug\net7.0\OrdersApp.WebApi.MvcApplicationPartsAssemblyInfo.cs
+D:\Programming\Github Projects\OrdersApp\OrdersAppSolution\OrdersApp.WebApi\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

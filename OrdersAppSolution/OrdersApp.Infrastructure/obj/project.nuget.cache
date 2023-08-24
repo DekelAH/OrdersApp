@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "o+x42ywMPX0C4MeowrMV1fz1fIQAmws0RiLd4zkGpe9SoexzrKMfBHAPGgR7ZG1ZNQV0cSGYTMX6EwMt0/C5hg==",
+  "dgSpecHash": "kEpqJ/m5XDjjvATGWqLDP4fY811DC4yHV7j2ex3rCvMB2dFxACFbBTWw+zzKphdeozM/ITnDxJleNRVmkhXj/w==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Github Projects\\OrdersApp\\OrdersAppSolution\\OrdersApp.Infrastructure\\OrdersApp.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\dekel\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\dekel\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\dekel\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\dekel\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.9\\microsoft.aspnetcore.authentication.jwtbearer.7.0.9.nupkg.sha512",
     "C:\\Users\\dekel\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "C:\\Users\\dekel\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.2.0\\microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "C:\\Users\\dekel\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.9\\microsoft.aspnetcore.cryptography.internal.7.0.9.nupkg.sha512",
