@@ -31,6 +31,7 @@ namespace OrdersApp.Core.DTO
         {
             return new Order()
             {
+                OrderID = OrderID,
                 OrderNumber = OrderNumber,
                 CustomerName = CustomerName,
                 OrderDate = OrderDate,

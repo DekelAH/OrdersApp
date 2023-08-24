@@ -87,6 +87,7 @@ namespace OrdersApp.Infrastructure.Repositories
                 return orderToUpdate;
             }
 
+            matchingOrder.OrderID = orderToUpdate.OrderID;
             matchingOrder.OrderNumber = orderToUpdate.OrderNumber;
             matchingOrder.OrderDate = orderToUpdate.OrderDate;
             matchingOrder.CustomerName = orderToUpdate.CustomerName;

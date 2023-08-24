@@ -7,7 +7,7 @@ using OrdersApp.Core.Identity;
 namespace OrdersApp.WebApi.Controllers
 {
     [AllowAnonymous]
-    public class Account : CustomControllerBase
+    public class AccountController : CustomControllerBase
     {
         #region Fields
 
@@ -19,7 +19,7 @@ namespace OrdersApp.WebApi.Controllers
 
         #region Ctors
 
-        public Account(
+        public AccountController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             SignInManager<ApplicationUser> signInManager
@@ -66,6 +66,45 @@ namespace OrdersApp.WebApi.Controllers
                 string? errorMessage = string.Join(" | ", result.Errors.Select(err => err.Description));
                 return Problem(errorMessage);
             }
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> PostLogin(LoginDTO loginDTO)
+        {
+            // Check Model Validation
+            if (!ModelState.IsValid)
+            {
+                string? errorMessage = string.Join(" | ", ModelState.Values.SelectMany(errors => errors.Errors)
+                                                                           .Select(err => err.ErrorMessage));
+                return Problem(errorMessage);
+            }
+
+            // SignIn User
+            var result = await _signInManager.PasswordSignInAsync(loginDTO.Email, loginDTO.Password, 
+                                                                  isPersistent: false, lockoutOnFailure: false);
+
+            // Check User
+            if (result.Succeeded)
+            {
+                ApplicationUser? user = await _userManager.FindByEmailAsync(loginDTO.Email);
+                if (user == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(new { personName = user.UserName, email = user.Email });
+            }
+            else
+            {
+                return Problem("Invalid email or password.");
+            }
+        }
+
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok("User logged out successfuly");
         }
 
         [HttpGet]
