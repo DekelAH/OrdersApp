@@ -155,7 +155,7 @@ namespace OrdersApp.Infrastructure.Migrations
                         {
                             OrderID = new Guid("1298c7c7-7355-47c9-9a6c-20fae1235e04"),
                             CustomerName = "Jane Mole",
-                            OrderDate = new DateTime(2023, 8, 23, 23, 6, 55, 279, DateTimeKind.Local).AddTicks(2459),
+                            OrderDate = new DateTime(2023, 8, 24, 17, 35, 56, 303, DateTimeKind.Local).AddTicks(1304),
                             OrderNumber = "ORD_0001",
                             TotalAmount = 42.200000000000003
                         },
@@ -163,7 +163,7 @@ namespace OrdersApp.Infrastructure.Migrations
                         {
                             OrderID = new Guid("bde74418-44bd-4bbc-a4cb-fcd1087010a9"),
                             CustomerName = "Chris Jankins",
-                            OrderDate = new DateTime(2023, 8, 23, 23, 6, 55, 279, DateTimeKind.Local).AddTicks(2536),
+                            OrderDate = new DateTime(2023, 8, 24, 17, 35, 56, 303, DateTimeKind.Local).AddTicks(1384),
                             OrderNumber = "ORD_0002",
                             TotalAmount = 22.199999999999999
                         });
@@ -318,6 +318,12 @@ namespace OrdersApp.Infrastructure.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpirationDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

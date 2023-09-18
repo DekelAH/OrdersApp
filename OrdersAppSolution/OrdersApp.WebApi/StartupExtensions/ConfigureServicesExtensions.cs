@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using OrdersApp.Core.Domain.RepositoryContracts;
 using OrdersApp.Core.Identity;
 using OrdersApp.Core.Services.Jwt;
@@ -11,6 +15,7 @@ using OrdersApp.Core.ServicesContracts.OrderItems;
 using OrdersApp.Core.ServicesContracts.Orders;
 using OrdersApp.Infrastructure.DataBaseContext;
 using OrdersApp.Infrastructure.Repositories;
+using System.Text;
 
 namespace OrdersApp.WebApi.StartupExtensions
 {
@@ -20,7 +25,12 @@ namespace OrdersApp.WebApi.StartupExtensions
 
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                var authorizationPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(authorizationPolicy));
+            });
+
             services.AddTransient<IJwtService, JwtService>();
             services.AddScoped<IOrdersGetterService, OrdersGetterService>();
             services.AddScoped<IOrdersAdderService, OrdersAdderService>();
@@ -52,6 +62,28 @@ namespace OrdersApp.WebApi.StartupExtensions
                 .AddDefaultTokenProviders()
                 .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>()
                 .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateAudience = true,
+                        ValidAudience = configuration["Jwt:Audience"],
+                        ValidateIssuer = true,
+                        ValidIssuer = configuration["Jwt:Issuer"],
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenSecretKey"])),
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+
+            services.AddAuthorization();
+
 
             return services;
         }

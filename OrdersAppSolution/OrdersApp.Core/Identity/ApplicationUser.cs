@@ -7,6 +7,8 @@ namespace OrdersApp.Core.Identity
         #region Properties
 
         public string? PersonName { get; set; }
+        public string? RefreshToken { get; set; } = string.Empty;
+        public DateTime RefreshTokenExpirationDateTime { get; set; }
 
         #endregion
     }

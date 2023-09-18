@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OrdersApp.Core.DTO;
 using OrdersApp.Core.Identity;
 using OrdersApp.Core.ServicesContracts;
+using System.Security.Claims;
 
 namespace OrdersApp.WebApi.Controllers
 {
@@ -65,6 +66,10 @@ namespace OrdersApp.WebApi.Controllers
             {
                 await _signInManager.SignInAsync(applicationUser, isPersistent: false);
                 var authenticationResponse = _jwtService.CreateJwtToken(applicationUser);
+                applicationUser.RefreshToken = authenticationResponse.RefreshToken;
+                applicationUser.RefreshTokenExpirationDateTime = authenticationResponse.RefreshTokenExpirationDateTime;
+                await _userManager.UpdateAsync(applicationUser);
+
                 return Ok(authenticationResponse);
             }
             else
@@ -86,7 +91,7 @@ namespace OrdersApp.WebApi.Controllers
             }
 
             // SignIn User
-            var result = await _signInManager.PasswordSignInAsync(loginDTO.Email, loginDTO.Password, 
+            var result = await _signInManager.PasswordSignInAsync(loginDTO.Email, loginDTO.Password,
                                                                   isPersistent: false, lockoutOnFailure: false);
 
             // Check User
@@ -99,7 +104,12 @@ namespace OrdersApp.WebApi.Controllers
                 }
 
                 await _signInManager.SignInAsync(applicationUser, isPersistent: false);
+
                 var authenticationResponse = _jwtService.CreateJwtToken(applicationUser);
+                applicationUser.RefreshToken = authenticationResponse.RefreshToken;
+                applicationUser.RefreshTokenExpirationDateTime = authenticationResponse.RefreshTokenExpirationDateTime;
+                await _userManager.UpdateAsync(applicationUser);
+
                 return Ok(authenticationResponse);
             }
             else
@@ -127,6 +137,38 @@ namespace OrdersApp.WebApi.Controllers
             {
                 return Ok(false);
             }
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> GenerateNewAccessToken(TokenModel tokenModel)
+        {
+            if (tokenModel == null)
+            {
+                return BadRequest("Invalid user request");
+            }
+
+            ClaimsPrincipal? claimsPrincipal = _jwtService.GetClaimsPrincipalFromJwtToken(tokenModel.Token);
+            if (claimsPrincipal == null)
+            {
+                return BadRequest("Invalid access token");
+            }
+
+            string? email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
+            ApplicationUser? user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null || user.RefreshToken != tokenModel.RefreshToken ||
+                user.RefreshTokenExpirationDateTime <= DateTime.Now)
+            {
+                return BadRequest("Invalid access");
+            }
+
+            AuthenticationResponse authenticationResponse = _jwtService.CreateJwtToken(user);
+            user.RefreshToken = authenticationResponse.RefreshToken;
+            user.RefreshTokenExpirationDateTime = authenticationResponse.RefreshTokenExpirationDateTime;
+
+            await _userManager.UpdateAsync(user);
+
+            return Ok(authenticationResponse);
         }
 
         #endregion
